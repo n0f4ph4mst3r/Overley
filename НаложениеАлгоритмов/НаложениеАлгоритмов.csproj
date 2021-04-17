@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Grayscale.cs" />
     <Compile Include="Overlay.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="OverleyForm.cs">
@@ -67,6 +68,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scretch.cs" />
     <Compile Include="ScretchedForm.cs">
       <SubType>Form</SubType>
     </Compile>
