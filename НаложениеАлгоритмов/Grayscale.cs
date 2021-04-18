@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace НаложениеАлгоритмов
 {
-    public class Grayscale 
+    public class GrayscaleOld
     {
         public Bitmap bitSource,bitGrayscale; //исходное изображение и результат работы алгоритма
         IntPtr pointerSource, pointerResult; //адреса Bitmapов

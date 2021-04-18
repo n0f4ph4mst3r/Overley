@@ -37,6 +37,8 @@ namespace НаложениеАлгоритмов
                     grayscaleform.MdiParent = this;
                     grayscaleform.Show();
                     окнаToolStripMenuItem.Enabled = true;
+                SourceImage gray = new Scretch (Data.file);
+
                 }
                 else
                     return;

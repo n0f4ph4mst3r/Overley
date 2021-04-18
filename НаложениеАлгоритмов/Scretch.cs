@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 
 namespace НаложениеАлгоритмов
 {
-    class Scretch
+    class ScretchOld
     {
         public Bitmap bitSource, bitScrethed; //исходное изображение и частотно-пропорциональное растяжение
         IntPtr pointerSource, pointerResult; //адреса Bitmapов

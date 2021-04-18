@@ -45,9 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default_kof.cs" />
     <Compile Include="Grayscale.cs" />
     <Compile Include="Overlay.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="SourceImage.cs" />
     <Compile Include="OverleyForm.cs">
       <SubType>Form</SubType>
     </Compile>
