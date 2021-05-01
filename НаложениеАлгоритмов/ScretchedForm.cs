@@ -20,22 +20,20 @@ namespace НаложениеАлгоритмов
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            Data.Q = Convert.ToDouble(QBox.Text);
-            Data.JPEGformat = new Overlay(0.2126, 0.7152, 0.0722, Data.Q, Data.qt, Data.qomega, Data.k);
-            JPEGpictureBox.Image = Data.JPEGformat.bitScrethed;
+            Data.sRGBformat.Q = Data.JPEGformat.Q = Convert.ToDouble(QBox.Text);
+
+            JPEGpictureBox.Image = Data.JPEGformat.Scretch.Bit;
             JPEGchart.Series[0].Points.Clear();
             for (int i = 0; i < 256; ++i)
             {
-                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.frequencyArrayScretched[i]);
+                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Scretch.Frequencys[i]);
             }
 
-            Data.Q = Convert.ToDouble(QBox.Text);
-            Data.sRGBformat = new Overlay(0.2126, 0.7152, 0.0722, Data.Q, Data.qt, Data.qomega, Data.k);
-            sRGBpictureBox.Image = Data.sRGBformat.bitScrethed;
+            sRGBpictureBox.Image = Data.sRGBformat.Scretch.Bit;
             sRGBchart.Series[0].Points.Clear();
             for (int i = 0; i < 256; ++i)
             {
-                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.frequencyArrayScretched[i]);
+                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Scretch.Frequencys[i]);
             }
         }
 
@@ -55,23 +53,20 @@ namespace НаложениеАлгоритмов
 
         private void ScretchedForm_Load(object sender, EventArgs e)
         {
-            //рисуем гистограммы
-            if (Data.OpenFileName != "")
-            {
-                JPEGpictureBox.Image = Data.JPEGformat.bitScrethed;
+                //рисуем гистограммы
+                JPEGpictureBox.Image = Data.JPEGformat.Scretch.Bit;
                 JPEGchart.Series[0].Points.Clear();
                 for (int i = 0; i < 256; ++i)
                 {
-                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.frequencyArrayScretched[i]);
+                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Scretch.Frequencys[i]);
                 }
 
-                sRGBpictureBox.Image = Data.sRGBformat.bitScrethed;
+                sRGBpictureBox.Image = Data.sRGBformat.Scretch.Bit;
                 sRGBchart.Series[0].Points.Clear();
                 for (int i = 0; i < 256; ++i)
                 {
-                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.frequencyArrayScretched[i]);
+                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Scretch.Frequencys[i]);
                 }
-            }
         }
         private void CheckedChanged(object sender, EventArgs e)
         {

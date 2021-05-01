@@ -46,8 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default_kof.cs" />
-    <Compile Include="Grayscale.cs" />
-    <Compile Include="Overlay.cs" />
+    <Compile Include="ImageProcessing.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="SourceImage.cs" />
     <Compile Include="OverleyForm.cs">
@@ -70,7 +69,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scretch.cs" />
     <Compile Include="ScretchedForm.cs">
       <SubType>Form</SubType>
     </Compile>

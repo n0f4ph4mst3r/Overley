@@ -33,18 +33,18 @@ namespace НаложениеАлгоритмов
 
         private void GrayscaleForm_Load(object sender, EventArgs e)
         {
-        //рисуем гистограммы
-                    JPEGpictureBox.Image = Data.JPEGformat.bitGrayscale;
+                    //рисуем гистограммы
+                    JPEGpictureBox.Image = Data.JPEGformat.Gray.Bit;
                     JPEGchart.Series[0].Points.Clear();
                     for (int i = 0; i < 256; ++i)
                     {
-                        JPEGchart.Series[0].Points.AddY(Data.JPEGformat.frequencyArray[i]);
+                        JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Gray.Frequencys[i]);
                     }
-                    sRGBpictureBox.Image = Data.sRGBformat.bitGrayscale;
+                    sRGBpictureBox.Image = Data.sRGBformat.Gray.Bit;
                     sRGBchart.Series[0].Points.Clear();
                     for (int i = 0; i < 256; ++i)
                     {
-                        sRGBchart.Series[0].Points.AddY(Data.sRGBformat.frequencyArray[i]);
+                        sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Gray.Frequencys[i]);
                     }
         }
         public GrayscaleForm()
