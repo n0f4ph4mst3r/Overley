@@ -11,8 +11,8 @@ namespace НаложениеАлгоритмов
     {
         private double q, qt, qomega, k;
         public Grayscale Gray; //оттенки серого
-        public Scretch Scretch; //растяжение
-        public Tele Tele; //телевизионный алгоритм
+        public Scretchscale Scretch; //растяжение
+        public Telescale Tele; //телевизионный алгоритм
         public Overley Overley; //наложение
 
         public double Q //коэффициент растяжения
@@ -67,10 +67,10 @@ namespace НаложениеАлгоритмов
         {
             Gray = new Grayscale(file, kof);
 
-            Scretch = new Scretch(file, kof);
+            Scretch = new Scretchscale(file, kof);
             q = Scretch.Q;
 
-            Tele = new Tele(file, kof);
+            Tele = new Telescale(file, kof);
             qt = Tele.Qt;
             qomega = Tele.Qomega;
 

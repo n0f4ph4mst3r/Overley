@@ -29,6 +29,8 @@ namespace НаложениеАлгоритмов
             Marshal.Copy(pointer, bytes, 0, bytes.Length);
             bit.UnlockBits(Databit);
         }
+        protected abstract void Build();
+        protected abstract byte GetBright(byte y);
         public abstract void Update();
     }
 
@@ -39,8 +41,9 @@ namespace НаложениеАлгоритмов
         protected BitmapData DatabitGray; //ссылка на битмап
         protected byte[] bytesGray; //байты
         protected double[] frequencyArray; //массив частот
-        protected double Yavg = 0, DevY = 0; //среднее Y и среднеквадратичное отклонение яркости
-        protected byte[] y; //массив яркостей
+        protected double Yavg, DevY; //среднее Y и среднеквадратичное отклонение яркости
+        protected byte[] bright; //массив яркостей
+        private byte[] y = new byte[256]; //промежуточный массив ярокстей y
         protected Default_kof kof;
 
         public double[] Frequencys
@@ -62,14 +65,20 @@ namespace НаложениеАлгоритмов
         public Grayscale(Image file, Default_kof kof) : base(file)
         {
             this.kof = kof;
+            byte count = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                y[i] = count;
+                count++;
+            }
             Build();
         }
-        void Build()
+        protected override void Build()
         {
             SetBright();
             CopyArray();
-            Yavg = GetAvg(Yavg);
-            DevY = GetDev(DevY, Yavg);
+            Yavg = GetAvg(y);
+            DevY = GetDev(y, Yavg);
         }
         public override void Update()
         {
@@ -78,10 +87,10 @@ namespace НаложениеАлгоритмов
 
         void SetBright() //находим яркость всех пикселей
         {
-            y = new byte[n];
+            bright = new byte[n];
             for (int i = 0; i < bytes.Length; i += 3)
             {
-                y[i / 3] = Convert.ToByte(Math.Round(kof.k1 * bytes[i] + kof.k2 * bytes[i + 1] + kof.k3 * bytes[i + 2]));
+                bright[i / 3] = Convert.ToByte(Math.Round(kof.k1 * bytes[i] + kof.k2 * bytes[i + 1] + kof.k3 * bytes[i + 2]));
             }
         }
 
@@ -98,7 +107,7 @@ namespace НаложениеАлгоритмов
 
             for (int i = 0; i < bytesGray.Length; i += 3)
             {
-                bytesGray[i] = bytesGray[i + 1] = bytesGray[i + 2] = GetBright(y[i / 3]); //приводим значения RGB к общему значению яркости
+                bytesGray[i] = bytesGray[i + 1] = bytesGray[i + 2] = GetBright(bright[i / 3]); //приводим значения RGB к общему значению яркости
                 frequencyArray[bytesGray[i]]++; //и инкриментируем элемент с индексом равному полученной яркости в шкале частот
             }
 
@@ -110,35 +119,37 @@ namespace НаложениеАлгоритмов
                 frequencyArray[i] /= n; //определяем частоту путем деления на количество пикселей
             }
         }
-        protected double GetAvg (double Avg) //определяем среднее значение
+        protected double GetAvg (byte[] arr) //определяем среднее значение
         {
+            double Avg = 0;
             for (int i = 0; i < 256; i++)
             {
-                Avg += i * frequencyArray[i]; 
+                Avg += arr[i] * frequencyArray[i]; 
             }
             return Avg;
         }
-        protected double GetDev(double Dev, double Avg) //находим среднеквадратичное отклонение
+        protected double GetDev(byte[] arr, double Avg) //находим среднеквадратичное отклонение
         {
+            double Dev = 0;
             for (int i = 0; i < 256; i++)
             {
-                Dev += Math.Pow(i - Avg, 2) * frequencyArray[i]; 
+                Dev += Math.Pow(arr[i] - Avg, 2) * frequencyArray[i]; 
             }
             Dev = Math.Sqrt(Dev);
             return Dev;
         }
 
-        byte GetBright(byte y)
+        protected override byte GetBright(byte y)
         {
             return y;
         }
     }
 
-    public class Scretch : Grayscale //частотно-пропорциональное растяжение
+    public class Scretchscale : Grayscale //частотно-пропорциональное растяжение
     {
-        protected double q = 0; //коэффициент Q
+        protected double q = 1000000000; //коэффициент Q
         protected byte[] z; //промежуточная шкала яркости
-        protected double Zavg = 0, DevZ = 0; //среднее Z и среднеквадратичное отклонение яркости
+        protected double Zavg, DevZ; //среднее Z и среднеквадратичное отклонение яркости
 
         public double Q
         {
@@ -153,22 +164,23 @@ namespace НаложениеАлгоритмов
             }
         }
 
-        public Scretch(Image file, Default_kof kof) 
+        public Scretchscale(Image file, Default_kof kof) 
             :base(file, kof)
         {
             Build();
         }
 
-        void Build()
+        protected new void Build()
         {
             SetZ();
             CopyArray();
-            Zavg = GetAvg(Zavg);
-            DevZ = GetDev(DevZ, Zavg);
+            Zavg = GetAvg(z);
+            DevZ = GetDev(z, Zavg);
         }
 
         public override void Update()
         {
+            base.Build();
             Build();
         }
 
@@ -192,15 +204,15 @@ namespace НаложениеАлгоритмов
                 z[i] = Convert.ToByte(Math.Abs(Math.Round(V * u[i]))); //итоговая шкала яркости
             }
         }
-        byte GetBright(byte y)
+        protected new byte GetBright(byte y)
         {
             return z[Convert.ToInt32(y)];
         }
     }
 
-    public class Tele : Scretch //телевизионный алгоритм
+    public class Telescale : Scretchscale //телевизионный алгоритм
     {
-        private double qt = 0, qomega = 0; //задаваемые характеристики
+        private double qt = 1, qomega = 1; //задаваемые характеристики
         protected byte[] t = new byte[256]; //массив яркостей
 
         public double Qt
@@ -229,13 +241,13 @@ namespace НаложениеАлгоритмов
             }
         }
 
-        public Tele(Image file, Default_kof kof) 
+        public Telescale(Image file, Default_kof kof) 
             : base(file, kof)
         {
             Build();
         }
 
-        void Build()
+        protected new void Build()
         {
             SetT();
             CopyArray();
@@ -267,13 +279,13 @@ namespace НаложениеАлгоритмов
                 t[i] = Convert.ToByte(temp);
             }
         }
-        byte GetBright(byte y)
+        protected new byte GetBright(byte y)
         {
             return t[Convert.ToInt32(y)];
         }
     }
 
-    public class Overley : Tele //наложение алгоритмов
+    public class Overley : Telescale //наложение алгоритмов
     {
         private double k = 0.5;
 
@@ -296,7 +308,7 @@ namespace НаложениеАлгоритмов
             CopyArray();
         }
 
-        byte GetBright(byte y)
+        protected new byte GetBright(byte y)
         {
             return (byte)(k * z[Convert.ToInt32(y)] + (1 - k) * t[Convert.ToInt32(y)]);
         }
