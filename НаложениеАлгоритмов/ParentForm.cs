@@ -20,19 +20,20 @@ namespace НаложениеАлгоритмов
 
         private void ОткрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                Data.OpenFileName = "";
+                string OpenFileName = "";
                 OpenFileDialog1.Title = "Открытие";
                 OpenFileDialog1.FileName = "";
                 OpenFileDialog1.DefaultExt = "*.jpg";
                 OpenFileDialog1.Filter = "Image Files(*.jpg)|*.jpg";
+
                 if (OpenFileDialog1.ShowDialog() == DialogResult.OK)
                 {
-                    Data.OpenFileName = OpenFileDialog1.FileName;
-                    Data.file = Image.FromFile(OpenFileDialog1.FileName);
-                    Data.Q = 0;
-                    Data.qt = Data.qomega = Data.k = 1;
-                    Data.JPEGformat = new Overlay(0.299, 0.587, 0.114, Data.Q, Data.qt, Data.qomega, Data.k);
-                    Data.sRGBformat = new Overlay(0.2126, 0.7152, 0.0722, Data.Q, Data.qt, Data.qomega, Data.k);
+                    OpenFileName = OpenFileDialog1.FileName;
+                    Image file = Image.FromFile(OpenFileDialog1.FileName);
+
+                    Data.JPEGformat = new ImageProcessing(file, Data.JPEG);
+                    Data.sRGBformat = new ImageProcessing(file, Data.sRGB);
+
                     GrayscaleForm grayscaleform = new GrayscaleForm();
                     grayscaleform.MdiParent = this;
                     grayscaleform.Show();

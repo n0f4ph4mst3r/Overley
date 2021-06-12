@@ -18,22 +18,21 @@ namespace НаложениеАлгоритмов
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            Data.qt = Convert.ToDouble(qtBox.Text);
-            Data.qomega = Convert.ToDouble(qomegaBox.Text);
-            Data.JPEGformat = new Overlay(0.2126, 0.7152, 0.0722, Data.Q, Data.qt, Data.qomega, Data.k);
-            JPEGpictureBox.Image = Data.JPEGformat.bitTele;
+            Data.sRGBformat.Qt = Data.JPEGformat.Qt = Convert.ToDouble(qtBox.Text);
+            Data.sRGBformat.Qt = Data.JPEGformat.Qomega = Convert.ToDouble(qomegaBox.Text);
+        
+            JPEGpictureBox.Image = Data.JPEGformat.Tele.Bit;
             JPEGchart.Series[0].Points.Clear();
             for (int i = 0; i < 256; ++i)
             {
-                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.frequencyArrayTele[i]);
+                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Tele.Frequencys[i]);
             }
 
-            Data.sRGBformat = new Overlay(0.2126, 0.7152, 0.0722, Data.Q, Data.qt, Data.qomega, Data.k);
-            sRGBpictureBox.Image = Data.sRGBformat.bitTele;
+            sRGBpictureBox.Image = Data.sRGBformat.Tele.Bit;
             sRGBchart.Series[0].Points.Clear();
             for (int i = 0; i < 256; ++i)
             {
-                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.frequencyArrayTele[i]);
+                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Tele.Frequencys[i]);
             }
         }
 
@@ -85,23 +84,20 @@ namespace НаложениеАлгоритмов
 
         private void TeleForm_Load(object sender, EventArgs e)
         {
-            //рисуем гистограммы
-            if (Data.OpenFileName != "")
-            {
-                JPEGpictureBox.Image = Data.JPEGformat.bitTele;
+                //рисуем гистограммы
+                JPEGpictureBox.Image = Data.JPEGformat.Tele.Bit;
                 JPEGchart.Series[0].Points.Clear();
                 for (int i = 0; i < 256; ++i)
                 {
-                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.frequencyArrayTele[i]);
+                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Tele.Frequencys[i]);
                 }
 
-                sRGBpictureBox.Image = Data.sRGBformat.bitTele;
+                sRGBpictureBox.Image = Data.sRGBformat.Tele.Bit;
                 sRGBchart.Series[0].Points.Clear();
                 for (int i = 0; i < 256; ++i)
                 {
-                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.frequencyArrayTele[i]);
+                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Tele.Frequencys[i]);
                 }
-            }
         }
     }
 }

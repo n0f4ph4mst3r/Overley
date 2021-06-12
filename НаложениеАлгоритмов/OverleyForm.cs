@@ -50,42 +50,37 @@ namespace НаложениеАлгоритмов
 
         private void OverlayForm_Load(object sender, EventArgs e)
         {
-            //рисуем гистограммы
-            if (Data.OpenFileName != "")
-            {
-                JPEGpictureBox.Image = Data.JPEGformat.bitoverlay;
+                //рисуем гистограммы
+                JPEGpictureBox.Image = Data.JPEGformat.Overley.Bit;
                 JPEGchart.Series[0].Points.Clear();
                 for (int i = 0; i < 256; ++i)
                 {
-                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.frequencyArrayoverlay[i]);
+                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Overley.Frequencys[i]);
                 }
 
-                sRGBpictureBox.Image = Data.sRGBformat.bitoverlay;
+                sRGBpictureBox.Image = Data.sRGBformat.Overley.Bit;
                 sRGBchart.Series[0].Points.Clear();
                 for (int i = 0; i < 256; ++i)
                 {
-                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.frequencyArrayoverlay[i]);
+                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Overley.Frequencys[i]);
                 }
-            }
         }
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            Data.k = Convert.ToDouble(kBox.Text);
-            Data.JPEGformat = new Overlay(0.299, 0.587, 0.114, Data.Q, Data.qt, Data.qomega, Data.k);
-            JPEGpictureBox.Image = Data.JPEGformat.bitoverlay;
+            Data.sRGBformat.K = Data.JPEGformat.K = Convert.ToDouble(kBox.Text);
+            JPEGpictureBox.Image = Data.JPEGformat.Overley.Bit;
             JPEGchart.Series[0].Points.Clear();
             for (int i = 0; i < 256; ++i)
             {
-                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.frequencyArrayoverlay[i]);
+                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Overley.Frequencys[i]);
             }
 
-            Data.sRGBformat = new Overlay(0.2126, 0.7152, 0.0722, Data.Q, Data.qt, Data.qomega, Data.k);
-            sRGBpictureBox.Image = Data.sRGBformat.bitoverlay;
+            sRGBpictureBox.Image = Data.sRGBformat.Overley.Bit;
             sRGBchart.Series[0].Points.Clear();
             for (int i = 0; i < 256; ++i)
             {
-                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.frequencyArrayoverlay[i]);
+                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Overley.Frequencys[i]);
             }
         }
     }
