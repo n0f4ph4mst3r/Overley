@@ -45,12 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractImage.cs" />
     <Compile Include="Default_kof.cs" />
-    <Compile Include="ImageGen.cs" />
-    <Compile Include="ImageProcessing.cs" />
     <Compile Include="Data.cs" />
-    <Compile Include="Interfaces.cs" />
-    <Compile Include="SourceImage.cs" />
+    <Compile Include="ImageContainer.cs" />
     <Compile Include="OverleyForm.cs">
       <SubType>Form</SubType>
     </Compile>

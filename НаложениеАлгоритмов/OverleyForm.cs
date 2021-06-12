@@ -50,37 +50,29 @@ namespace НаложениеАлгоритмов
 
         private void OverlayForm_Load(object sender, EventArgs e)
         {
-                //рисуем гистограммы
-                JPEGpictureBox.Image = Data.JPEGformat.Overley.Bit;
-                JPEGchart.Series[0].Points.Clear();
-                for (int i = 0; i < 256; ++i)
-                {
-                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Overley.Frequencys[i]);
-                }
-
-                sRGBpictureBox.Image = Data.sRGBformat.Overley.Bit;
-                sRGBchart.Series[0].Points.Clear();
-                for (int i = 0; i < 256; ++i)
-                {
-                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Overley.Frequencys[i]);
-                }
+            DrawHistogramm();
         }
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            Data.sRGBformat.K = Data.JPEGformat.K = Convert.ToDouble(kBox.Text);
-            JPEGpictureBox.Image = Data.JPEGformat.Overley.Bit;
+            Data.sRGBContainer.K = Data.JPEGContainer.K = Convert.ToDouble(kBox.Text);
+            DrawHistogramm();
+        }
+        private void DrawHistogramm()
+        {
+            //рисуем гистограммы
+            JPEGpictureBox.Image = Data.JPEGContainer.OverleyBit;
             JPEGchart.Series[0].Points.Clear();
             for (int i = 0; i < 256; ++i)
             {
-                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Overley.Frequencys[i]);
+                JPEGchart.Series[0].Points.AddY(Data.JPEGContainer.OverleyFrequencys[i]);
             }
 
-            sRGBpictureBox.Image = Data.sRGBformat.Overley.Bit;
+            sRGBpictureBox.Image = Data.JPEGContainer.OverleyBit;
             sRGBchart.Series[0].Points.Clear();
             for (int i = 0; i < 256; ++i)
             {
-                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Overley.Frequencys[i]);
+                sRGBchart.Series[0].Points.AddY(Data.JPEGContainer.OverleyFrequencys[i]);
             }
         }
     }

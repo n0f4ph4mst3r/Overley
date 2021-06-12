@@ -18,22 +18,10 @@ namespace НаложениеАлгоритмов
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            Data.sRGBformat.Qt = Data.JPEGformat.Qt = Convert.ToDouble(qtBox.Text);
-            Data.sRGBformat.Qt = Data.JPEGformat.Qomega = Convert.ToDouble(qomegaBox.Text);
-        
-            JPEGpictureBox.Image = Data.JPEGformat.Tele.Bit;
-            JPEGchart.Series[0].Points.Clear();
-            for (int i = 0; i < 256; ++i)
-            {
-                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Tele.Frequencys[i]);
-            }
+            Data.sRGBContainer.Qt = Data.JPEGContainer.Qt = Convert.ToDouble(qtBox.Text);
+            Data.sRGBContainer.Qomega = Data.JPEGContainer.Qomega = Convert.ToDouble(qomegaBox.Text);
 
-            sRGBpictureBox.Image = Data.sRGBformat.Tele.Bit;
-            sRGBchart.Series[0].Points.Clear();
-            for (int i = 0; i < 256; ++i)
-            {
-                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Tele.Frequencys[i]);
-            }
+            DrawHistogramm();
         }
 
         private void CheckedChanged(object sender, EventArgs e)
@@ -84,20 +72,24 @@ namespace НаложениеАлгоритмов
 
         private void TeleForm_Load(object sender, EventArgs e)
         {
-                //рисуем гистограммы
-                JPEGpictureBox.Image = Data.JPEGformat.Tele.Bit;
-                JPEGchart.Series[0].Points.Clear();
-                for (int i = 0; i < 256; ++i)
-                {
-                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Tele.Frequencys[i]);
-                }
+            DrawHistogramm();
+        }
+        private void DrawHistogramm()
+        {
+            //рисуем гистограммы
+            JPEGpictureBox.Image = Data.JPEGContainer.TeleBit;
+            JPEGchart.Series[0].Points.Clear();
+            for (int i = 0; i < 256; ++i)
+            {
+                JPEGchart.Series[0].Points.AddY(Data.JPEGContainer.TeleFrequencys[i]);
+            }
 
-                sRGBpictureBox.Image = Data.sRGBformat.Tele.Bit;
-                sRGBchart.Series[0].Points.Clear();
-                for (int i = 0; i < 256; ++i)
-                {
-                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Tele.Frequencys[i]);
-                }
+            sRGBpictureBox.Image = Data.sRGBContainer.TeleBit;
+            sRGBchart.Series[0].Points.Clear();
+            for (int i = 0; i < 256; ++i)
+            {
+                sRGBchart.Series[0].Points.AddY(Data.sRGBContainer.TeleFrequencys[i]);
+            }
         }
     }
 }

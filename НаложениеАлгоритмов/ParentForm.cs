@@ -17,7 +17,6 @@ namespace НаложениеАлгоритмов
             InitializeComponent();
         }
 
-
         private void ОткрытьToolStripMenuItem_Click(object sender, EventArgs e)
         {
                 string OpenFileName = "";
@@ -31,8 +30,8 @@ namespace НаложениеАлгоритмов
                     OpenFileName = OpenFileDialog1.FileName;
                     Image file = Image.FromFile(OpenFileDialog1.FileName);
 
-                    Data.JPEGformat = new ImageProcessing(file, Data.JPEG);
-                    Data.sRGBformat = new ImageProcessing(file, Data.sRGB);
+                    Data.JPEGContainer = new ImageContainer(file, Data.JPEG);
+                    Data.sRGBContainer = new ImageContainer(file, Data.sRGB);
 
                     GrayscaleForm grayscaleform = new GrayscaleForm();
                     grayscaleform.MdiParent = this;

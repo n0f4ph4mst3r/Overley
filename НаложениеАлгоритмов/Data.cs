@@ -10,8 +10,9 @@ namespace НаложениеАлгоритмов
 {
     public static class Data
     {
-        public static ImageProcessing JPEGformat { get; set; } //набор изображений для JPEGформата
-        public static ImageProcessing sRGBformat { get; set; } //набор изображений для sRGBформата
+        public static ImageContainer JPEGContainer;
+
+        public static ImageContainer sRGBContainer;
 
         public static Default_kof JPEG = new Default_kof(0.299, 0.587, 0.114);
 

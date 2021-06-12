@@ -10,8 +10,7 @@ using System.Text;
 
 namespace НаложениеАлгоритмов
 {
-    //для исходного изображения
-    abstract public class SourceImageInterface
+    public abstract class AbstractImage
     {
         //поля
         protected Bitmap bit; //изображение
@@ -21,11 +20,7 @@ namespace НаложениеАлгоритмов
         protected byte[] bytes; //байты
 
         //методы
-        protected abstract void Build();
-        public void Update()
-        {
-            Build();
-        }
+        public abstract void Update();
 
         //свойства
         public virtual Bitmap Bit
@@ -52,13 +47,13 @@ namespace НаложениеАлгоритмов
             }
         }
     }
-
-    abstract public class ImageGen : SourceImageInterface
+    abstract public class ImageGen : AbstractImage
     {
         //поля
-        protected Bitmap source; //исходное изображение
+        protected Bitmap source; //исходное изображение 
         protected byte[] bytes_source; //байты исходного изображения
         protected double[] frequencyArray; //массив частот
+        protected byte[] y; //яркость каждого пикселя в исходном изображении
 
         //методы
         protected abstract byte GetBright(byte bright); //найти конечную яркость для данного пикселя
@@ -88,14 +83,6 @@ namespace НаложениеАлгоритмов
                 frequencyArray[i] /= n; //определяем частоту путем деления на количество пикселей
             }
         }
-        protected void SetBright() //находим яркость всех пикселей
-        {
-            y = new byte[n];
-            for (int i = 0; i < bytes_source.Length; i += 3)
-            {
-                y[i / 3] = Convert.ToByte(Math.Round(kof.k1 * bytes_source[i] + kof.k2 * bytes_source[i + 1] + kof.k3 * bytes_source[i + 2]));
-            }
-        }
 
         //свойства
         public Bitmap BitSource
@@ -121,62 +108,35 @@ namespace НаложениеАлгоритмов
                 return frequencyArray;
             }
         }
-    }
 
-    abstract public class GrayscaleInterface : ImageGen
-    {
-        protected double GetAvg(double Avg) //определяем среднее значение
-        {
-            for (int i = 0; i < 256; i++)
-            {
-                Avg += i * frequencyArray[i];
-            }
-            return Avg;
-        }
-        protected double GetDev(double Dev, double Avg) //находим среднеквадратичное отклонение
-        {
-            for (int i = 0; i < 256; i++)
-            {
-                Dev += Math.Pow(i - Avg, 2) * frequencyArray[i];
-            }
-            Dev = Math.Sqrt(Dev);
-            return Dev;
-        }
-        public abstract double Avg { get; }
-        public abstract double Dev { get; }
-    }
-
-    abstract public class TeleInterface : ImageGen
-    {
-        protected double qt = 1, qomega = 1;
-        protected byte[] t = new byte[256]; //массив яркостей
-
-
-
-        public double Qt
+        public byte[] Y
         {
             get
             {
-                return qt;
-            }
-            set
-            {
-                qt = value;
-                Update();
+                return y;
             }
         }
-
-        public double Qomega
+        abstract public class MathMod : ImageGen
         {
-            get
+            protected double GetAvg(double Avg) //определяем среднее значение
             {
-                return qomega;
+                for (int i = 0; i < 256; i++)
+                {
+                    Avg += i * frequencyArray[i];
+                }
+                return Avg;
             }
-            set
+            protected double GetDev(double Dev, double Avg) //находим среднеквадратичное отклонение
             {
-                qomega = value;
-                Update();
+                for (int i = 0; i < 256; i++)
+                {
+                    Dev += Math.Pow(i - Avg, 2) * frequencyArray[i];
+                }
+                Dev = Math.Sqrt(Dev);
+                return Dev;
             }
+            public abstract double Avg { get; }
+            public abstract double Dev { get; }
         }
     }
 }

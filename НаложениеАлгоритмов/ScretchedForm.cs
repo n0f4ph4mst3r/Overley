@@ -20,21 +20,8 @@ namespace НаложениеАлгоритмов
 
         private void Runbutton_Click(object sender, EventArgs e)
         {
-            Data.sRGBformat.Q = Data.JPEGformat.Q = Convert.ToDouble(QBox.Text);
-
-            JPEGpictureBox.Image = Data.JPEGformat.Scretch.Bit;
-            JPEGchart.Series[0].Points.Clear();
-            for (int i = 0; i < 256; ++i)
-            {
-                JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Scretch.Frequencys[i]);
-            }
-
-            sRGBpictureBox.Image = Data.sRGBformat.Scretch.Bit;
-            sRGBchart.Series[0].Points.Clear();
-            for (int i = 0; i < 256; ++i)
-            {
-                sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Scretch.Frequencys[i]);
-            }
+            Data.sRGBContainer.Q = Data.JPEGContainer.Q = Convert.ToDouble(QBox.Text);
+            DrawHistogramm();
         }
 
         private void QBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -53,20 +40,7 @@ namespace НаложениеАлгоритмов
 
         private void ScretchedForm_Load(object sender, EventArgs e)
         {
-                //рисуем гистограммы
-                JPEGpictureBox.Image = Data.JPEGformat.Scretch.Bit;
-                JPEGchart.Series[0].Points.Clear();
-                for (int i = 0; i < 256; ++i)
-                {
-                    JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Scretch.Frequencys[i]);
-                }
-
-                sRGBpictureBox.Image = Data.sRGBformat.Scretch.Bit;
-                sRGBchart.Series[0].Points.Clear();
-                for (int i = 0; i < 256; ++i)
-                {
-                    sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Scretch.Frequencys[i]);
-                }
+            DrawHistogramm();
         }
         private void CheckedChanged(object sender, EventArgs e)
         {
@@ -84,6 +58,24 @@ namespace НаложениеАлгоритмов
                     JPEGchart.Visible = false;
                     sRGBchart.Visible = true;
                 }
+        }
+
+        private void DrawHistogramm()
+        {
+
+            JPEGpictureBox.Image = Data.JPEGContainer.ScretchBit;
+            JPEGchart.Series[0].Points.Clear();
+            for (int i = 0; i < 256; ++i)
+            {
+                JPEGchart.Series[0].Points.AddY(Data.JPEGContainer.ScretchFrequencys[i]);
+            }
+
+            sRGBpictureBox.Image = Data.sRGBContainer.ScretchBit;
+            sRGBchart.Series[0].Points.Clear();
+            for (int i = 0; i < 256; ++i)
+            {
+                sRGBchart.Series[0].Points.AddY(Data.sRGBContainer.ScretchFrequencys[i]);
+            }
         }
     }
 }

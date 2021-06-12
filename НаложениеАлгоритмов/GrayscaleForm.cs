@@ -13,6 +13,8 @@ namespace НаложениеАлгоритмов
 {
     public partial class GrayscaleForm : Form
     {
+        public ImageContainer jpegcontainer, srgbontainer;
+
         private void CheckedChanged(object sender, EventArgs e)
         {
                 if (JPEGbutton.Checked)
@@ -34,19 +36,21 @@ namespace НаложениеАлгоритмов
         private void GrayscaleForm_Load(object sender, EventArgs e)
         {
                     //рисуем гистограммы
-                    JPEGpictureBox.Image = Data.JPEGformat.Gray.Bit;
+                    JPEGpictureBox.Image = Data.JPEGContainer.GrayBit;
                     JPEGchart.Series[0].Points.Clear();
                     for (int i = 0; i < 256; ++i)
                     {
-                        JPEGchart.Series[0].Points.AddY(Data.JPEGformat.Gray.Frequencys[i]);
+                        JPEGchart.Series[0].Points.AddY(Data.JPEGContainer.GrayFrequencys[i]);
                     }
-                    sRGBpictureBox.Image = Data.sRGBformat.Gray.Bit;
+                    sRGBpictureBox.Image = Data.JPEGContainer.GrayBit;
                     sRGBchart.Series[0].Points.Clear();
                     for (int i = 0; i < 256; ++i)
                     {
-                        sRGBchart.Series[0].Points.AddY(Data.sRGBformat.Gray.Frequencys[i]);
+                        sRGBchart.Series[0].Points.AddY(Data.JPEGContainer.GrayFrequencys[i]);
                     }
         }
+
+
         public GrayscaleForm()
         {
             InitializeComponent();
