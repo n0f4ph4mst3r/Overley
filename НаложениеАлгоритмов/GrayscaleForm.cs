@@ -13,7 +13,6 @@ namespace НаложениеАлгоритмов
 {
     public partial class GrayscaleForm : Form
     {
-        public ImageContainer jpegcontainer, srgbontainer;
 
         private void CheckedChanged(object sender, EventArgs e)
         {
@@ -31,6 +30,7 @@ namespace НаложениеАлгоритмов
                     JPEGchart.Visible = false;
                     sRGBchart.Visible = true;
                 }
+            SelectImage();
         }
 
         private void GrayscaleForm_Load(object sender, EventArgs e)
@@ -50,6 +50,17 @@ namespace НаложениеАлгоритмов
                     }
         }
 
+        private void GrayscaleForm_Activated(object sender, EventArgs e)
+        {
+            SelectImage();
+        }
+
+        void SelectImage()
+        {
+            if (JPEGpictureBox.Visible)
+                Data.SelectImage(Data.JPEGContainer.GrayBit);
+            else Data.SelectImage(Data.sRGBContainer.GrayBit);
+        }
 
         public GrayscaleForm()
         {

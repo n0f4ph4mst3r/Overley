@@ -46,6 +46,7 @@ namespace НаложениеАлгоритмов
                 JPEGchart.Visible = false;
                 sRGBchart.Visible = true;
             }
+            SelectImage();
         }
 
         private void OverlayForm_Load(object sender, EventArgs e)
@@ -74,6 +75,13 @@ namespace НаложениеАлгоритмов
             {
                 sRGBchart.Series[0].Points.AddY(Data.JPEGContainer.OverleyFrequencys[i]);
             }
+            SelectImage();
+        }
+        void SelectImage()
+        {
+            if (JPEGpictureBox.Visible)
+                Data.SelectImage(Data.JPEGContainer.OverleyBit);
+            else Data.SelectImage(Data.sRGBContainer.OverleyBit);
         }
     }
 }

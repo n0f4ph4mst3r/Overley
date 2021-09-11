@@ -58,6 +58,7 @@ namespace НаложениеАлгоритмов
                     JPEGchart.Visible = false;
                     sRGBchart.Visible = true;
                 }
+            SelectImage();
         }
 
         private void DrawHistogramm()
@@ -76,6 +77,13 @@ namespace НаложениеАлгоритмов
             {
                 sRGBchart.Series[0].Points.AddY(Data.sRGBContainer.ScretchFrequencys[i]);
             }
+            SelectImage();
+        }
+        void SelectImage()
+        {
+            if (JPEGpictureBox.Visible)
+                Data.SelectImage(Data.JPEGContainer.ScretchBit);
+            else Data.SelectImage(Data.sRGBContainer.ScretchBit);
         }
     }
 }

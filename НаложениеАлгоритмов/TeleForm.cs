@@ -40,6 +40,7 @@ namespace НаложениеАлгоритмов
                 JPEGchart.Visible = false;
                 sRGBchart.Visible = true;
             }
+            SelectImage();
         }
 
         private void qtBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -90,6 +91,13 @@ namespace НаложениеАлгоритмов
             {
                 sRGBchart.Series[0].Points.AddY(Data.sRGBContainer.TeleFrequencys[i]);
             }
+            SelectImage();
+        }
+        void SelectImage()
+        {
+            if (JPEGpictureBox.Visible)
+                Data.SelectImage(Data.JPEGContainer.TeleBit);
+            else Data.SelectImage(Data.sRGBContainer.TeleBit);
         }
     }
 }

@@ -17,5 +17,12 @@ namespace НаложениеАлгоритмов
         public static Default_kof JPEG = new Default_kof(0.299, 0.587, 0.114);
 
         public static Default_kof sRGB = new Default_kof(0.2126, 0.7152, 0.0722);
+
+        public static Bitmap SelectedBit;
+
+        static public void SelectImage(Bitmap bit)
+        {
+            SelectedBit = bit;
+        }
     }
 }

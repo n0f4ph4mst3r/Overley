@@ -78,7 +78,7 @@ namespace НаложениеАлгоритмов
         {
             get
             {
-                return tele.Bit;
+                return overley.Bit;
             }
         }
 

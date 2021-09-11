@@ -151,6 +151,7 @@
             this.Controls.Add(this.JPEGchart);
             this.Name = "GrayscaleForm";
             this.Text = "Оттенки серого";
+            this.Activated += new System.EventHandler(this.GrayscaleForm_Activated);
             this.Load += new System.EventHandler(this.GrayscaleForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.JPEGpictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.JPEGchart)).EndInit();

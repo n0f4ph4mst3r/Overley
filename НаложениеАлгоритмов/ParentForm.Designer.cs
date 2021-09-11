@@ -34,9 +34,11 @@
             this.окнаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оттенкиСерогоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.частотнопропорциональноеРастяжениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.телевизионныйАлгоритмToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.наложениеАлгоритмовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.сохранитьКакToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +56,8 @@
             // файлToolStripMenuItem
             // 
             this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.открытьToolStripMenuItem});
+            this.открытьToolStripMenuItem,
+            this.сохранитьКакToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.файлToolStripMenuItem.Text = "Файл";
@@ -92,10 +95,6 @@
             this.частотнопропорциональноеРастяжениеToolStripMenuItem.Text = "Частотно-пропорциональное растяжение";
             this.частотнопропорциональноеРастяжениеToolStripMenuItem.Click += new System.EventHandler(this.ЧастотнопропорциональноеРастяжениеToolStripMenuItem_Click);
             // 
-            // OpenFileDialog1
-            // 
-            this.OpenFileDialog1.FileName = "openFileDialog1";
-            // 
             // телевизионныйАлгоритмToolStripMenuItem
             // 
             this.телевизионныйАлгоритмToolStripMenuItem.Name = "телевизионныйАлгоритмToolStripMenuItem";
@@ -109,6 +108,17 @@
             this.наложениеАлгоритмовToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
             this.наложениеАлгоритмовToolStripMenuItem.Text = "Наложение алгоритмов";
             this.наложениеАлгоритмовToolStripMenuItem.Click += new System.EventHandler(this.наложениеАлгоритмовToolStripMenuItem_Click);
+            // 
+            // OpenFileDialog1
+            // 
+            this.OpenFileDialog1.FileName = "openFileDialog1";
+            // 
+            // сохранитьКакToolStripMenuItem
+            // 
+            this.сохранитьКакToolStripMenuItem.Name = "сохранитьКакToolStripMenuItem";
+            this.сохранитьКакToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьКакToolStripMenuItem.Text = "Сохранить как";
+            this.сохранитьКакToolStripMenuItem.Click += new System.EventHandler(this.сохранитьКакToolStripMenuItem_Click);
             // 
             // ParentForm
             // 
@@ -138,6 +148,8 @@
         private System.Windows.Forms.ToolStripMenuItem частотнопропорциональноеРастяжениеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem телевизионныйАлгоритмToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem наложениеАлгоритмовToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьКакToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }
 
